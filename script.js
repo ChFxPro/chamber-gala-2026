@@ -204,6 +204,21 @@ decisionItems.forEach((item) => {
   item.addEventListener("click", () => {
     const isChecked = item.classList.toggle("is-checked");
     item.setAttribute("aria-pressed", String(isChecked));
+
+    const savedDecisions = JSON.parse(localStorage.getItem("gala2026-decisions") || "[]");
+    const itemText = item.textContent.trim();
+    if (isChecked) {
+      if (!savedDecisions.includes(itemText)) {
+        savedDecisions.push(itemText);
+      }
+    } else {
+      const index = savedDecisions.indexOf(itemText);
+      if (index > -1) {
+        savedDecisions.splice(index, 1);
+      }
+    }
+    localStorage.setItem("gala2026-decisions", JSON.stringify(savedDecisions));
+
     updateDecisionProgress();
   });
   item.addEventListener("keydown", (event) => {
@@ -216,9 +231,18 @@ decisionItems.forEach((item) => {
 
 updateDecisionProgress();
 
+const savedDecisions = JSON.parse(localStorage.getItem("gala2026-decisions") || "[]");
+decisionItems.forEach((item) => {
+  if (savedDecisions.includes(item.textContent.trim())) {
+    item.classList.add("is-checked");
+    item.setAttribute("aria-pressed", "true");
+  }
+});
+updateDecisionProgress();
+
 const revealItems = [
   ...document.querySelectorAll(
-    ".section, .summary-grid article, .time-card, .visual-list article, .poster-card, .tier, .plate-media, .atmosphere-grid article, .production-grid article, .principle-list span, .decision-list article"
+    ".section, .summary-grid article, .time-card, .visual-list article, .poster-card, .tier, .plate-media, .stage-list li, .principle-list li, .decision-list article"
   ),
 ];
 
