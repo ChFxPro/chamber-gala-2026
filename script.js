@@ -266,3 +266,53 @@ if ("IntersectionObserver" in window) {
 } else {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
+
+const sponsorForm = document.querySelector(".sponsor-form");
+
+if (sponsorForm) {
+  const statusEl = sponsorForm.querySelector("[data-form-status]");
+  const submitButton = sponsorForm.querySelector("button[type='submit']");
+
+  function setFormStatus(message, state) {
+    if (!statusEl) return;
+    statusEl.hidden = false;
+    statusEl.textContent = message;
+    statusEl.className = `form-status is-${state}`;
+  }
+
+  if (new URLSearchParams(window.location.search).get("sent") === "1") {
+    setFormStatus(
+      "Thanks! Your sponsorship interest has been sent to the Chamber. We'll follow up soon.",
+      "success"
+    );
+  }
+
+  sponsorForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    setFormStatus("Sending your inquiry…", "pending");
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+      const response = await fetch(sponsorForm.action, {
+        method: "POST",
+        body: new FormData(sponsorForm),
+        headers: { Accept: "application/json" },
+      });
+
+      if (!response.ok) throw new Error("Form submission failed");
+
+      sponsorForm.reset();
+      setFormStatus(
+        "Thanks! Your sponsorship interest has been sent to the Chamber. We'll follow up soon.",
+        "success"
+      );
+    } catch (error) {
+      setFormStatus(
+        "Something went wrong sending this form. Please email tamika@brevardncchamber.org directly instead.",
+        "error"
+      );
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
+  });
+}
