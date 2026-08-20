@@ -1,5 +1,17 @@
 [
   {
+    "title": "2026 Gala Planning Spreadsheet",
+    "category": "Current Year Planning",
+    "status": "Active working source",
+    "owner": "Gala Committee",
+    "dateAdded": "2026-08-20",
+    "eventDate": "2026-09-25",
+    "format": "Google Sheet",
+    "path": "https://docs.google.com/spreadsheets/d/1QRmiH8OWsKU4T-3VF6ETFziG8bYj12JGVCrhpoBxKdY/edit?usp=sharing",
+    "decisionNeeded": "Use as the current-year planning source for budget, vendors, sponsors, ticketing, run-of-show, and committee tracking.",
+    "notes": "Primary 2026 Gala planning spreadsheet supplied as the current-year working baseline. This resource takes priority over prior-year context."
+  },
+  {
     "title": "Chamber of Commerce Gala Catering BEO",
     "category": "Vendor Quote",
     "status": "Quote received",
