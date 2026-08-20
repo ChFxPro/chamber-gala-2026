@@ -189,6 +189,7 @@ tiers[0]?.click();
 const decisionItems = [...document.querySelectorAll(".decision-list article")];
 const decisionCount = document.querySelector("[data-decision-count]");
 const decisionTotal = document.querySelector("[data-decision-total]");
+const decisionStorageKey = document.body.dataset.decisionStorage || `gala2026-decisions:${location.pathname}`;
 
 function updateDecisionProgress() {
   if (decisionCount) {
@@ -205,7 +206,7 @@ decisionItems.forEach((item) => {
     const isChecked = item.classList.toggle("is-checked");
     item.setAttribute("aria-pressed", String(isChecked));
 
-    const savedDecisions = JSON.parse(localStorage.getItem("gala2026-decisions") || "[]");
+    const savedDecisions = JSON.parse(localStorage.getItem(decisionStorageKey) || "[]");
     const itemText = item.textContent.trim();
     if (isChecked) {
       if (!savedDecisions.includes(itemText)) {
@@ -217,7 +218,7 @@ decisionItems.forEach((item) => {
         savedDecisions.splice(index, 1);
       }
     }
-    localStorage.setItem("gala2026-decisions", JSON.stringify(savedDecisions));
+    localStorage.setItem(decisionStorageKey, JSON.stringify(savedDecisions));
 
     updateDecisionProgress();
   });
@@ -231,7 +232,7 @@ decisionItems.forEach((item) => {
 
 updateDecisionProgress();
 
-const savedDecisions = JSON.parse(localStorage.getItem("gala2026-decisions") || "[]");
+const savedDecisions = JSON.parse(localStorage.getItem(decisionStorageKey) || "[]");
 decisionItems.forEach((item) => {
   if (savedDecisions.includes(item.textContent.trim())) {
     item.classList.add("is-checked");
@@ -319,7 +320,30 @@ if (sponsorForm) {
 
 const resourceList = document.querySelector("[data-resource-list]");
 const resourceCount = document.querySelector("[data-resource-count]");
+const resourceLabel = document.querySelector("[data-resource-label]");
+const resourceFilters = [...document.querySelectorAll("[data-resource-filter]")];
 
 if (resourceList && resourceCount) {
-  resourceCount.textContent = resourceList.querySelectorAll(".resource-item").length;
+  const totalResources = resourceList.querySelectorAll(".resource-item").length;
+  resourceCount.textContent = totalResources;
+  if (resourceLabel) resourceLabel.textContent = totalResources === 1 ? "resource" : "resources";
+}
+
+if (resourceList && resourceFilters.length) {
+  const resources = [...resourceList.querySelectorAll(".resource-item")];
+  resourceFilters.forEach((filter) => {
+    filter.addEventListener("click", () => {
+      const selected = filter.dataset.resourceFilter;
+      resourceFilters.forEach((item) => item.classList.toggle("is-active", item === filter));
+      resources.forEach((resource) => {
+        const shouldShow = selected === "all" || resource.dataset.resourceCategory === selected;
+        resource.hidden = !shouldShow;
+      });
+      if (resourceCount) {
+        const visibleResources = resources.filter((resource) => !resource.hidden).length;
+        resourceCount.textContent = visibleResources;
+        if (resourceLabel) resourceLabel.textContent = visibleResources === 1 ? "resource" : "resources";
+      }
+    });
+  });
 }
