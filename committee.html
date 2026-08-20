@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
   </head>
-  <body>
+  <body data-decision-storage="gala2026-committee-decisions">
     <div class="page-progress" aria-hidden="true"><span></span></div>
     <header class="public-topbar">
       <a class="public-topbar__brand" href="committee.html" aria-current="page">
@@ -69,11 +69,16 @@
             <strong>Build the committee operating system</strong>
           </div>
           <ul class="hub-status-list">
-            <li><span></span>Catering quote received and filed</li>
+            <li><span></span>Catering quote received, filed, and available here</li>
             <li><span></span>Sponsor and ticket pages are draft-ready</li>
             <li><span></span>Theme assets are in place</li>
             <li><span></span>Public launch details still need approval</li>
           </ul>
+          <div class="hub-metrics" aria-label="Committee hub metrics">
+            <div><strong>2</strong><span>resources live</span></div>
+            <div><strong>4</strong><span>asset groups</span></div>
+            <div><strong>9</strong><span>open checks</span></div>
+          </div>
         </div>
       </div>
     </header>
@@ -139,13 +144,21 @@
             whether it is draft, approved, informational, or waiting on action.
           </p>
         </div>
-        <div class="resource-toolbar" aria-label="Resource summary">
-          <strong><span data-resource-count>1</span> resource filed</strong>
-          <span>Catalog source: <code>resources.json</code></span>
-          <span>Private files stay off the public site</span>
+        <div class="resource-toolbar" aria-label="Resource controls">
+          <div>
+          <strong><span data-resource-count>2</span> <span data-resource-label>resources</span> filed</strong>
+            <span>Catalog source: <code>resources.json</code></span>
+          </div>
+          <div class="resource-filters" aria-label="Filter resources">
+            <button type="button" class="is-active" data-resource-filter="all">All</button>
+            <button type="button" data-resource-filter="vendor">Vendor Quotes</button>
+            <button type="button" data-resource-filter="context">Context</button>
+            <button type="button" data-resource-filter="asset">Assets</button>
+            <button type="button" data-resource-filter="decision">Decisions</button>
+          </div>
         </div>
         <div class="resource-list" data-resource-list>
-          <article class="resource-item">
+          <article class="resource-item" data-resource-category="vendor">
             <div class="resource-item__main">
               <div class="resource-item__meta">
                 <span>Vendor Quote</span>
@@ -162,11 +175,46 @@
                 charges, deposit terms, and approval path.
               </p>
             </div>
-            <div class="private-resource-note">
-              <strong>Private file</strong>
-              <span>Available in the local committee resources folder, not published to GitHub Pages.</span>
-            </div>
+            <a class="cta-button cta-button--ghost" href="resources/Chamber of Commerce Gala - 09.25.26.pdf" target="_blank" rel="noopener">Open Quote</a>
           </article>
+          <article class="resource-item" data-resource-category="context">
+            <div class="resource-item__main">
+              <div class="resource-item__meta">
+                <span>Context</span>
+                <span>Reference</span>
+                <span>Added 2026-08-20</span>
+              </div>
+              <h3>Previous Gala Planning Spreadsheet</h3>
+              <p>
+                Prior-year gala document for committee context and planning comparison as this
+                year&apos;s budget, vendors, sponsor structure, and event operations take shape.
+              </p>
+              <p class="resource-item__decision">
+                Use as a baseline for this year&apos;s planning assumptions, not as a confirmed
+                current-year decision record.
+              </p>
+            </div>
+            <a
+              class="cta-button cta-button--ghost"
+              href="https://docs.google.com/spreadsheets/d/1gFtOYVGROV_b2Jv37czEYevhc8k4_i-xmuGNCOnqakE/edit?usp=share_link"
+              target="_blank"
+              rel="noopener"
+            >Open Sheet</a>
+          </article>
+        </div>
+        <div class="quote-preview" aria-label="Catering quote preview">
+          <div class="quote-preview__copy">
+            <h3>Catering Quote Preview</h3>
+            <p>
+              The embedded preview keeps the current BEO close to the decisions it affects.
+              Use the full PDF link for printing, sharing, or detailed review.
+            </p>
+            <a class="cta-button" href="resources/Chamber of Commerce Gala - 09.25.26.pdf" target="_blank" rel="noopener">Open Full PDF</a>
+          </div>
+          <iframe
+            title="Catering quote PDF preview"
+            src="resources/Chamber of Commerce Gala - 09.25.26.pdf#toolbar=1"
+          ></iframe>
         </div>
       </section>
 
@@ -283,6 +331,9 @@
               <p class="section__label">Open Decisions</p>
               <h2 id="committee-decisions-heading">Decide Before Public Launch</h2>
             </div>
+            <p class="decision-progress">
+              <strong data-decision-count>0</strong> of <span data-decision-total>9</span> committee checks complete
+            </p>
           </div>
           <div class="decision-note">
             <p>
@@ -304,7 +355,7 @@
               <div class="decision-group__grid">
                 <article tabindex="0" aria-pressed="false"><span aria-hidden="true"></span>Confirm ticket pricing and purchase link</article>
                 <article tabindex="0" aria-pressed="false"><span aria-hidden="true"></span>Confirm sponsor perks and form destination</article>
-                <article tabindex="0" aria-pressed="false"><span aria-hidden="true"></span>Decide which committee resources remain private</article>
+                <article tabindex="0" aria-pressed="false"><span aria-hidden="true"></span>Decide which future committee resources stay private</article>
               </div>
             </div>
             <div class="decision-group">
