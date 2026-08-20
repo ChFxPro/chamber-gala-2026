@@ -242,7 +242,7 @@ updateDecisionProgress();
 
 const revealItems = [
   ...document.querySelectorAll(
-    ".section, .summary-grid article, .time-card, .visual-list article, .poster-card, .tier, .plate-media, .stage-list li, .principle-list li, .decision-list article"
+    ".section, .summary-grid article, .time-card, .visual-list article, .poster-card, .tier, .plate-media, .stage-list li, .principle-list li, .decision-list article, .hub-card, .resource-item, .vendor-row, .timeline-list li, .asset-tile"
   ),
 ];
 
@@ -315,4 +315,11 @@ if (sponsorForm) {
       if (submitButton) submitButton.disabled = false;
     }
   });
+}
+
+const resourceList = document.querySelector("[data-resource-list]");
+const resourceCount = document.querySelector("[data-resource-count]");
+
+if (resourceList && resourceCount) {
+  resourceCount.textContent = resourceList.querySelectorAll(".resource-item").length;
 }
