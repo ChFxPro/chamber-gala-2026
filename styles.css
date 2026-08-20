@@ -28,7 +28,7 @@ html {
 }
 
 [id] {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 8.5rem;
 }
 
 body {
@@ -78,6 +78,10 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 button {
@@ -147,7 +151,7 @@ p {
 
 .section-nav {
   position: sticky;
-  top: 3px;
+  top: 4.15rem;
   z-index: 40;
   display: flex;
   gap: 0.35rem;
@@ -1894,6 +1898,35 @@ p {
   padding: clamp(1rem, 2.5vw, 1.5rem);
 }
 
+.resource-item--featured {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(255, 213, 79, 0.74);
+  background:
+    radial-gradient(circle at 94% 12%, rgba(36, 215, 255, 0.18), transparent 16rem),
+    linear-gradient(145deg, rgba(255, 213, 79, 0.14), rgba(255, 79, 198, 0.06) 44%, transparent),
+    var(--panel-strong);
+  box-shadow: var(--shadow), 0 0 38px rgba(255, 213, 79, 0.12);
+}
+
+.resource-item--featured::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  content: "";
+  background: linear-gradient(180deg, var(--yellow), var(--cyan), var(--magenta));
+}
+
+.resource-item--featured h3 {
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+}
+
+.resource-item--featured .resource-item__meta span {
+  border-color: rgba(255, 213, 79, 0.42);
+  background: rgba(255, 213, 79, 0.09);
+  color: #fff4cf;
+}
+
 .resource-item__main {
   display: grid;
   gap: 0.6rem;
@@ -2069,9 +2102,17 @@ p {
 }
 
 @media (max-width: 720px) {
+  [id] {
+    scroll-margin-top: 12rem;
+  }
+
   .public-topbar {
     justify-content: center;
     text-align: center;
+  }
+
+  .section-nav {
+    top: 7.75rem;
   }
 
   .form-row,
